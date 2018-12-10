@@ -163,12 +163,12 @@ module ZSS
       send message
     end
 
-    def send(msg)
-      log.trace("sending: \n #{msg}") if log.is_debug
+    def send(message)
+      log.trace("sending: \n #{message}") if log.is_debug
 
-      frames = msg.to_frames
+      frames = message.to_frames
       #remove identity frame on request
-      frames.shift if msg.req?
+      frames.shift if message.req?
       success = socket.send_msg(*frames)
 
       log.error("An Error ocurred while sending message", request_metadata(message)) unless success
